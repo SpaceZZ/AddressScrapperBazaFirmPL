@@ -17,6 +17,7 @@ list_of_links = []
 list_of_companies = []
 last_page = 2808
 
+
 # def get_links_from_the_file(uri):
 # 	with open(uri) as csvfile:
 # 		readCSV = csv.reader(csvfile, delimiter=",")
@@ -27,8 +28,9 @@ last_page = 2808
 def get_links_to_the_companies(uri, page):
 	list_of_companies = []
 	site = uri
-	hdr = {'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
-	req = requests.get(site, headers = hdr)
+	hdr = {
+		'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
+	req = requests.get(site, headers=hdr)
 	print(req)
 	soup = bs4.BeautifulSoup(req.text, 'html.parser')
 	# listoflinks = soup.select("a href", class_='tekst_tytul_miejsce')
@@ -41,12 +43,8 @@ def get_links_to_the_companies(uri, page):
 	for company in list_of_companies:
 		v = Link.Firma(company, page)
 
+
 for i in range(1, last_page):
 	current_domain = domain + str(i)
 	print(i)
 	get_links_to_the_companies(current_domain, i)
-
-
-
-
-
